@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<title>Node.js Blog</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+
+<style>
+</style>
+<style>
+#con {
+ width: 39em;
+  padding: 0 0 1em 0;
+ margin-bottom: 2em;
+ font-family: 'Trebuchet MS', 'Lucida Grande',
+   Verdana, Lucida, Geneva, Helvetica,
+   Arial, sans-serif;
+ background-color: #90bade;
+ color: #333;
+ list-style: none;
+ }
+ #con ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  }
+
+ #con li {
+  border-bottom: 1px solid #90bade;
+  margin: 0;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+<div class="jumbotron">
+<h1>Streamingn API Notifcaiotn </h1>
+</div>
+<div id="con">
+<ul class="streams"></ul>
+</div>
+
+<script>
+console.log('records before ');
+var url = window.location.href;
+var socket = io(url);
+socket.on('records', function (data) {
+console.log(data);
+console.log(data.sobject );
+console.log(data.sobject.Id );
+
+
+//var results = JSON.parse(data.sobject);
+var streamList = $('ul.streams');
+
+streamList.prepend('<br/> <li>' +
+  data.sobject.Name + ' : ' + data.sobject.StageName +
+   data.sobject.Amount + ': ' + data.sobject.ExpectedRevenue +'</li>');
+});
+
+
+
+
+
+</script>
+
+</body>
+
+</html>
